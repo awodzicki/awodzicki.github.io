@@ -1,11 +1,12 @@
-title: John Doe # your name (or website title) here
-logo: "/images/logo.png?raw=true" # your photo (or logo) here
+title: Ashley Wodzicki # your name (or website title) here
+logo: "/images/Profile2023_round.png?raw=true" # your photo (or logo) here
 description: > # your text below (remove <br> elements if you don't need line breaks)
-  First description 
+  Data driven professional with over 7 years of experience in customer training and instructional design. Creating projects using SQL and Tableau to enter the field of data analytics.
   <br><br>
-  Second description 
+  When I'm not working with data you can find me riding my bike, baking cookies, or reading a book. 
   <br><br>
-  <a href="https://www.linkedin.com/in/example/">View My LinkedIn Profile</a> 
+  <a href="https://www.linkedin.com/in/awodzicki/">Connect on LinkedIn</a>
+
   
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
