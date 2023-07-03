@@ -1,4 +1,4 @@
-## Analyzing Bike Share Behavior Using SQL & Tableau
+## Analyzing Bike Rental Behavior Using SQL & Tableau
 *This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying the differences between types of riders using the bike sharing service.*
 
 Key Findings:
@@ -101,7 +101,8 @@ This query returned several trip_durations as 00:00:00 or only a few seconds. I 
 
 ### 3. Data Analysis
 **3.1 Total rides completed**
-Which rider type is completing the most rides/rentals? Members are completing more rides, accounting for 60.5% of all rides in the year.
+*Which rider type is completing the most rides/rentals?* 
+Members are completing more rides, accounting for 60.5% of all rides in the year.
 ```SQL
 SELECT 
 	member_casual AS Rider_type,
@@ -130,7 +131,7 @@ GROUP BY member_casual
 ORDER BY member_casual;
 ```
 
-  After identifying that casual riders spent more time riding, I wanted to know what is the average ride length for each rider type? On average, casual riders spend 23 minutes riding and members spend 12 minutes riding. Casual riders spend almost twice as much time riding than members during their rental!
+  After identifying that casual riders spent more time riding, I wanted to explore the average ride length for each rider type. On average, casual riders spend 23 minutes riding and members spend 12 minutes riding. Casual riders spend almost twice as much time riding than members during their rental!
 ```SQL
 SELECT
 	member_casual AS rider_type,
@@ -142,8 +143,7 @@ GROUP BY member_casual
 ```
 
 **3.3 Seasonal Trends**
-	* *What are the most popular months for bike rentals?* *
-How many rides are completed each month for each rider type?
+  *What are the most popular months for bike rentals? How many rides are completed each month for each rider type?*
 July is the most popular month for bike rentals, accounting for 642,522 total rides by casual riders and members. June and August were also popular months. The number of bike rentals in these months correlates to the warmer weather in Chicago, ideal for bike rentals.
 ```SQL
 SELECT
@@ -161,8 +161,7 @@ FROM tripdata_cleaned
 GROUP BY DATE_PART('month', started_at)
 ORDER BY total_rides DESC
 ```
-
-  * *Does the time of year impact how much time casual riders and members spend riding?* *
+*Does the time of year impact how much time casual riders and members spend riding?*
   The average trip length for member riders stays fairly consistent throughout the year, ranging between 9 and 13 minutes. Casual riders spend more time riding during the summer months, with average trip durations longer than 22 minutes in May, June, July, and August. Casual riders spend more time riding in summer months when compared to members.
 ```SQL
 SELECT
@@ -175,7 +174,7 @@ GROUP BY
 ```
 
 **3.4 Rides by Weekday**
-  * *What are the most popular weekdays for bike rides among casual riders and members?* *
+  *What are the most popular weekdays for bike rides among casual riders and members?*
   The most bike rides occur on Saturday and the number of rides completed by casual riders exceeds rides completed by members. The number of rides completed by members is more consistent through the week, where the number of casual riders increases on Saturday, Sunday, and Friday. This may be due to casual riders spending time working during the weekdays and renting bikes during their free time on the weekends. Whereas members may be using the bike rentals to commute to and from work during the weekdays.
 ```SQL
 SELECT
@@ -195,7 +194,7 @@ ORDER BY EXTRACT(dow from started_at) ASC
 ```
 
 **3.5 Most Utilized Start Stations**
-  * *What start stations are most popular among casual riders and members?* *
+  *What start stations are most popular among casual riders and members?*
 
 ```SQL
 SELECT 
@@ -211,16 +210,29 @@ LIMIT 20;
 ```
 
 **3.6 Most Utilized End Stations**
-  * *What end stations are most popular among casual riders and members?* *
+*What end stations are most popular among casual riders and members?*
 
-
-
+```SQL
+SELECT 
+    DISTINCT end_station_name,
+    COUNT(*) AS total_rides,
+    SUM(CASE WHEN member_casual = 'member' THEN 1 END) AS member_rides,
+    SUM(CASE WHEN member_casual = 'casual' THEN 1 END) AS casual_rides
+FROM tripdata_cleaned
+WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02' 
+GROUP BY end_station_name
+ORDER BY total_rides DESC
+LIMIT 20;
+```
 
 ### 4. Conclusions
+
+
 
 ### 5. Business Reccomendations
 
 ### 6. Considerations for further analysis
+Additional data about user demographics and trip purposes could be useful to understand the motivation behind casual riders and members using the bike share service. These additional data points could assits with more targeted ads to specific age groups and provide deeper insights into user motivations and preferences. Moreover, additiona data included with the daily weather when bikes are rented could also provide insights into the number of rides completed that day and seasonal trends related to cooler and warmer months.
 
 ---
 
