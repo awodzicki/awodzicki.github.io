@@ -1,7 +1,6 @@
-[Back to Portfolio](awodzicki.github.io)
----
-
 ## Cyclistic Bike Share Analysis Using SQL & Tableau
+
+---
 
 ### 1. Introduction
 
