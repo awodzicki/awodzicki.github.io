@@ -2,7 +2,7 @@
 
 ---
 
-[Cyclistic Bike Share Case Study](/cyclisticbikeshare.md)
+[Analyzing Bike Rental Behavior - Case Study](/cyclisticbikeshare.md)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
