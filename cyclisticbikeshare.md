@@ -1,8 +1,16 @@
-## Cyclistic Bike Share Analysis Using SQL & Tableau
+## Analyzing Bike Share Behavior Using SQL & Tableau
+* *This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Data was analyzed from a fictional company, * *Cyclistic,* * with a focus on identifying the differences between types of riders using the bike sharing service.* *
+
+Key Findings:
+1. The average ride duration for casual riders is almost twice as long as members.
+2. Casual Riders completed more rides during summer months, but the number of rides completed in these months did not exceed the rides completed by members.
+3. Member riders use the bike sharing service more consistently the cansual riders across all months and weekdays.
+
+[View the Tableau dashboard here](https://public.tableau.com/views/CyclisticBikeShare_16879150650930/CyclisticBikeShare?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ---
 
-### 1. Introduction
+### 1. Scenario
 
   This report aims to provide insights into the use of Cyclistic bike rentals between annual members and casual riders. The goal is to inform strategic marketing decisions aimed at converting casual riders into annual members. 
 	Cyclistic is a bike-share program in Chicago that features more than 5,800 bicycles and 600 docking stations. Cyclistic offers flexibility of its pricing plans including single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. Customers who purchase single-ride or full-day passes are referred to as casual riders. Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. 
