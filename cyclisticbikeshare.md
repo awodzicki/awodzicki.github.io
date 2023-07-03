@@ -1,5 +1,5 @@
 ## Analyzing Bike Share Behavior Using SQL & Tableau
-* *This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Data was analyzed from a fictional company, * *Cyclistic,* * with a focus on identifying the differences between types of riders using the bike sharing service.* *
+This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Data was analyzed from a fictional company, * *Cyclistic,* * with a focus on identifying the differences between types of riders using the bike sharing service.
 
 Key Findings:
 1. The average ride duration for casual riders is almost twice as long as members.
