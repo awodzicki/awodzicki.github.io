@@ -1,10 +1,10 @@
 ## Analyzing Bike Rental Behavior Using SQL & Tableau
-*This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying the differences between types of riders using the bike sharing service.*
+*This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying the differences between how types of riders using the bike sharing service.*
 
 Key Findings:
-1. The average ride duration for casual riders is almost twice as long as members.
-2. Casual Riders completed more rides during summer months, but the number of rides completed in these months did not exceed the rides completed by members.
-3. Member riders use the bike sharing service more consistently the cansual riders across all months and weekdays.
+1. Casual riders rent bike for longer durations than member riders, with an average ride duration almost twice as long as members.
+2. Casual riders completed more rides during summer months and weekends.
+3. Member riders use the bike sharing service more consistently thank casual riders across all months and weekdays.
 
 [View the Tableau dashboard here](https://public.tableau.com/views/CyclisticBikeShare_16879150650930/CyclisticBikeShare?:language=en-US&:display_count=n&:origin=viz_share_link)
 
@@ -19,7 +19,7 @@ Key Findings:
    The marking team is tasks with identifying the patterns between annual members and casual riders. The insights derived from this analysis will serve as the foundation for a targeted marketing strategy aimed at converting casual riders into annual members. 
 
 **1.2	Data Sources**
-  The primary data source for this analysis is [Cyclistic’s historical trip data](https://divvy-tripdata.s3.amazonaws.com/index.html). This dataset provides historical bike trip data and has been made publicly available by Motivate International Inc. The data is organized in CSV files with data available in years, fiscal quarters, and months depending on the year. I will be using the 12 months of data from May 2022 to April 2023 available in 12 CSV files.
+  The primary data source for this analysis is [Cyclistic’s historical trip data](https://divvy-tripdata.s3.amazonaws.com/index.html). This dataset provides historical bike trip data and has been made publicly available by Motivate International Inc. The data is organized in CSV files with data available in years, fiscal quarters, and months depending on the year. 12 months of data was analyzed from May 2022 to April 2023, which was available in 12 CSV files.
 
 ### 2. Preparation for data analysis
   The data is organized in rows and columns. Each row represents a record of one bike rental. Each record contains the following fields:
@@ -39,10 +39,10 @@ Key Findings:
 +	member_casual, Character Varying, The type of rider completing the rental: member or casual
 
 **2.1 Uploading to PostrgreSQL**
-	The CSV files for 12 months of data with were too large to combine and manipulate within excel, so I used PostgreSQL to import and combine the files into one table. I ensured that there was consistency between the column titles of each file before importing. Combing the 12 CSV files into a single dataset streamlined the analysis process.
+	The CSV files for 12 months of data with were too large to combine and manipulate within excel, so I used PostgreSQL to import and combine the files into one table. I ensured that there was consistency between the column titles of each file before importing and combing the 12 CSV files into a single table to query all data at once.
 
 **2.2 Preview data**
-	I previewed the data by running the query below to gain a better understanding of they formatting of the data and identify any missing data.
+	I previewed the data with the query below to gain a better understanding of the formatting and identify any missing data.
 
 ```SQL
 SELECT *
@@ -69,7 +69,7 @@ SELECT COUNT(*)
 Using the results from these queries, I calculated the percentage of data with NULL values.
 1324946 Null Values / 5859061 Total Rows = 0.226
 	
-About 23% of the data was incomplete. I decided to move forward with removing any row with a NULL value since majority of the data was complete.
+About 23% of the data was incomplete. I decided to move forward with removing any row with a NULL value since majority of the data was complete. Any row that contained a NULL value for start_station_name, start_station_id, end_station_name, or end_station_id was removed.
 
 **2.4 Start and End Times**
   When completing a bike rental, the date and time stamp for the start time should ocurr before the end time. Any data with an end time before the start time would be inaccurate. I ran a query to identify if any started_at times were after the ended_at times. This resulted in 70 rows. I removed this data, as the ride end time cannot be before ride start time.
@@ -96,12 +96,11 @@ LIMIT 250
 ```
 
 This query returned several trip_durations as 00:00:00 or only a few seconds. I also sorted by descending trip_duration and found the longest trip duration was 22 days. There were also trip lengths of 7, 6, and 3 days. 
-	I decided to only analyze trip durations that were less than a day in length and more than 2 minutes. I created a new table titled tripdata_cleaned with a column for trip_duration, calculating the difference between the end time and start time. I only kept data with trip durations that were greater or equal to 2 minutes and less than 1 day.
-
+	I decided to only analyze trip durations that were less than a day in length and 2 minutes or longer. I created a new table titled tripdata_cleaned with a column for trip_duration, calculating the difference between the end time and start time. I only added data to this table with trip durations that were greater or equal to 2 minutes and less than 1 day.
 
 ### 3. Data Analysis
 **3.1 Total rides completed**
-*Which rider type is completing the most rides/rentals?* 
+*Which rider type is completing the most rides overall?* 
 Members are completing more rides, accounting for 60.5% of all rides in the year.
 ```SQL
 SELECT 
@@ -118,7 +117,8 @@ ORDER BY member_casual;
 ```
 
 **Time Spent Riding**
-  Which riders are spending more time riding? Casual riders spent more time riding during the past year, riding 128302.95 more hours than member riders.
+  *Which riders are spending more time riding?*
+  Casual riders spent more time riding during the past year, riding 128302.95 more hours than member riders.
 ```SQL
 SELECT
 	member_casual AS Rider_type,
@@ -131,7 +131,7 @@ GROUP BY member_casual
 ORDER BY member_casual;
 ```
 
-  After identifying that casual riders spent more time riding, I wanted to explore the average ride length for each rider type. On average, casual riders spend 23 minutes riding and members spend 12 minutes riding. Casual riders spend almost twice as much time riding than members during their rental!
+  After identifying that casual riders spent more time riding, I wanted to explore the average ride length for each rider type. 
 ```SQL
 SELECT
 	member_casual AS rider_type,
@@ -141,6 +141,7 @@ FROM tripdata_cleaned
 WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02'
 GROUP BY member_casual
 ```
+On average, casual riders spend 23 minutes riding and members spend 12 minutes riding. Casual riders spend almost twice as much time riding than members during their rental!
 
 **3.3 Seasonal Trends**
   *What are the most popular months for bike rentals? How many rides are completed each month for each rider type?*
@@ -175,7 +176,7 @@ GROUP BY
 
 **3.4 Rides by Weekday**
   *What are the most popular weekdays for bike rides among casual riders and members?*
-  The most bike rides occur on Saturday and the number of rides completed by casual riders exceeds rides completed by members. The number of rides completed by members is more consistent through the week, where the number of casual riders increases on Saturday, Sunday, and Friday. This may be due to casual riders spending time working during the weekdays and renting bikes during their free time on the weekends. Whereas members may be using the bike rentals to commute to and from work during the weekdays.
+  Overall, the most bike rides occur on Saturday and this is the only day where the number of rides completed by casual riders exceeds rides completed by members. The number of rides completed by members is more consistent through the week, where the number of casual riders increases on Saturday, Sunday, and Friday. This may be due to casual riders spending time working during the weekdays and renting bikes during their free time on the weekends. Whereas members may be using the bike rentals to commute to and from work during the weekdays.
 ```SQL
 SELECT
   EXTRACT(dow from started_at) AS Weekday,
@@ -226,10 +227,22 @@ LIMIT 20;
 ```
 
 ### 4. Conclusions
-
+- Casual riders spend more time riding than member riders. 
+- Saturday is the most popular riding day for casual and member riders.
+- Member riders use bike rentals more consistently throughout the week, while the number of casual riders increases on Fridays, Saturdays, and Sundays.
+- The summer months of June, July, and August have more rides compelted by both casual riders and members when compared to other months.
+- Streeter Dr & Grand Avenue is the most popular station for starting and ending rides. Over 3,000 more rides are started and completed at this station compared to the second most popular station. Additionally, the list of top 20 start stations and end stations were very similar with only slight differences in order when comaring the number of rides.
 
 
 ### 5. Business Reccomendations
+Include additional information / advertisements about membership benefits during the initial rental process on Saturdays, Fridays, and Sundays. Since more casual riders are renting bikes on these days, the advertisements are more likely to be seen by casual riders.
+
+Additionally, and email promotions encouraging previous casual riders to become members should be sent on Saturdays, Fridays, and Sundays when the most rides are being completed.
+
+Based on the average ride time of 12 minutes by member riders, a promotional discount could be offered to casual riders who complete rides that are longer than 15 minutes. This encourages riders who are completing longer trips to convert to memberships.
+
+Advertisements for memberships should be focused on the Streeter Dr & Grand Ave, DuSable Lake Shore Dr & Monroe St, Michigan Ave & Oak St, DuSable Lake Shore Dr & North Blvd, Wells St & Concord Ln stations. These are the top 5 start and end stations, where the advertisements would be seen by the most casual riders. QR codes could also be added to these stations to offer easy acces to additional membership information.
+
 
 ### 6. Considerations for further analysis
 Additional data about user demographics and trip purposes could be useful to understand the motivation behind casual riders and members using the bike share service. These additional data points could assits with more targeted ads to specific age groups and provide deeper insights into user motivations and preferences. Moreover, additiona data included with the daily weather when bikes are rented could also provide insights into the number of rides completed that day and seasonal trends related to cooler and warmer months.
