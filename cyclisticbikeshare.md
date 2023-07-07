@@ -2,9 +2,10 @@
 *This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying the differences between how types of riders using the bike sharing service.*
 
 Key Findings:
-1. Casual riders rent bike for longer durations than member riders, with an average ride duration almost twice as long as members.
-2. Casual riders completed more rides during summer months and weekends.
-3. Member riders use the bike sharing service more consistently thank casual riders across all months and weekdays.
+1. Casual riders rent bikes for longer durations than member riders, with an average ride duration of 23 minutes, which is almost twice as long as members.
+2. Saturday is the most popular riding day for both casual and member riders.
+3. Casual riders complete more trips on weekends and in summer months.
+4. Member riders also complete more rides during summer months, but ride more consistently throughout the week.
 
 [View the Tableau dashboard here](https://public.tableau.com/views/CyclisticBikeShare_16879150650930/CyclisticBikeShare?:language=en-US&:display_count=n&:origin=viz_share_link)
 
