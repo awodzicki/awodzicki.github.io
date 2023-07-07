@@ -1,7 +1,7 @@
 ## Data Analysis Portfolio
 
 ---
-Welcome to my portfolio! This page holds projects I've completed while exploring different tools for data analysis. I hope you enjoy reviewing my projects as much as I enjoyed creating them.
+Welcome to my portfolio! This page holds projects I've completed while exploring tools for data analysis. I hope you enjoy reviewing my projects as much as I enjoyed creating them.
 
 ---
 
