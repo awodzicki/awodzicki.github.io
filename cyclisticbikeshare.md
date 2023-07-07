@@ -1,4 +1,4 @@
-## Analyzing Bike Rental Behavior - Cyclistic Case Study
+## Analyzing Bike Rental Behavior Using SQL & Tableau
 *This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying the differences between how types of riders using the bike sharing service.*
 
 Key Findings:
