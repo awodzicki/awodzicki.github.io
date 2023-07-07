@@ -1,16 +1,15 @@
-## Portfolio
+## Data Analysis Portfolio
 
 ---
 
 [Analyzing Bike Rental Behavior - Case Study](/cyclisticbikeshare.md)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+This project uses SQL and Tableau to analyzing city bike sharing data to determine differences between casual riders and riders with annual memberships.
+<img src="images/cyclisticcover.png"/>
 
 ---
 
 ### Tableau Dashboards
 
-[Titanic Survivors Dashboard](/unknown)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
 
