@@ -103,19 +103,7 @@ This query returned several trip_durations as 00:00:00 or only a few seconds. I 
 **3.1 Total rides completed**
 *Which rider type is completing the most rides overall?* 
 Members are completing more rides, accounting for 60.5% of all rides in the year.
-```SQL
-SELECT 
-	member_casual AS Rider_type,
-	COUNT(*) AS number_of_riders,
-	ROUND(
-		COUNT(*) * 100.0 / (SELECT COUNT(*) from tripdata_cleaned),
-		2
-		) AS percentage_of_trips
-FROM tripdata_cleaned
-WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02'
-GROUP BY member_casual
-ORDER BY member_casual;
-```
+<img src="images/cyclist/3.1 Total Rides.png"/>
 
 **Time Spent Riding**
   *Which riders are spending more time riding?*
