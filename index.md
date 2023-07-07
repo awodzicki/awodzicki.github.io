@@ -1,7 +1,6 @@
 ## Hello! 👋 
 
----
-Welcome to my portfolio! This page contains projects I've completed while exploring tools for data analysis.
+Welcome to my portfolio! This page contains projects and certificates I've completed while exploring data analysis tools.
 
 ---
 ### Data Analysis Projects
@@ -14,7 +13,7 @@ This project uses SQL and Tableau to analyzing city bike sharing data to determi
 <br>
 
 ---
-### Certificates & Learning
+### Certificates
 
 [The Complete SQL Bootcamp - Udemy](/certs/Udemy_TheCompleteSQLBootcamp.pdf)<br>
 *Issued July 2023*
@@ -28,5 +27,3 @@ This project uses SQL and Tableau to analyzing city bike sharing data to determi
 
 
 ---
-<p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
-<!-- Remove above link if you don't want to attibute -->
