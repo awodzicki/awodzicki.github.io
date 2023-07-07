@@ -108,115 +108,36 @@ Members are completing more rides, accounting for 60.5% of all rides in the year
 **Time Spent Riding**
   *Which riders are spending more time riding?*
   Casual riders spent more time riding during the past year, riding 128302.95 more hours than member riders.
-```SQL
-SELECT
-	member_casual AS Rider_type,
-	SUM(trip_duration) AS duration_riding,
-	CAST(SUM(EXTRACT(epoch from trip_duration) / 60) as DECIMAL(16,2)) AS duration_in_minutes,
-	CAST(SUM(EXTRACT(epoch from trip_duration) / 60/60 ) as DECIMAL(16,2)) AS duration_in_hours
-FROM tripdata_cleaned
-WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02'
-GROUP BY member_casual
-ORDER BY member_casual;
-```
+<img src="images/cyclist/3.2 Total Riding Time.png"/>
 
   After identifying that casual riders spent more time riding, I wanted to explore the average ride length for each rider type. 
-```SQL
-SELECT
-	member_casual AS rider_type,
-	AVG(trip_duration) AS avg_tripduration,
-	CAST( AVG(EXTRACT(epoch from trip_duration) / 60) as DECIMAL(12,2)) AS Minutes_avg_tripduration
-FROM tripdata_cleaned
-WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02'
-GROUP BY member_casual
-```
+<img src="images/cyclist/3.2 Average Trip Duration.png"/>
 On average, casual riders spend 23 minutes riding and members spend 12 minutes riding. Casual riders spend almost twice as much time riding than members during their rental!
 
 **3.3 Seasonal Trends**
   *What are the most popular months for bike rentals? How many rides are completed each month for each rider type?*
 July is the most popular month for bike rentals, accounting for 642,522 total rides by casual riders and members. June and August were also popular months. The number of bike rentals in these months correlates to the warmer weather in Chicago, ideal for bike rentals.
-```SQL
-SELECT
-  DATE_PART('month', started_at) AS month,
-  COUNT(*) AS total_rides,
-  COUNT(CASE WHEN member_casual = 'casual' THEN 1 end) AS casual_rides,
-  CAST(COUNT(CASE WHEN member_casual = 'casual' THEN 1 end) * 100.0 / COUNT(*)
-	   as DECIMAL(4,2))
-	  AS percent_casual_rides,
-  COUNT(CASE WHEN member_casual = 'member' THEN 1 end) AS member_rides,
-  CAST(COUNT(CASE WHEN member_casual = 'member' THEN 1 end) * 100.0 / COUNT(*)
-	   as DECIMAL(4,2))
-	  AS percent_member_rides
-FROM tripdata_cleaned
-GROUP BY DATE_PART('month', started_at)
-ORDER BY total_rides DESC
-```
+<img src="images/cyclist/3.3 Monthly Number of Rides.png"/>
+
 *Does the time of year impact how much time casual riders and members spend riding?*
   The average trip length for member riders stays fairly consistent throughout the year, ranging between 9 and 13 minutes. Casual riders spend more time riding during the summer months, with average trip durations longer than 22 minutes in May, June, July, and August. Casual riders spend more time riding in summer months when compared to members.
-```SQL
-SELECT
-  DATE_PART('month', started_at) AS month,
-  AVG(CASE WHEN member_casual = 'casual' THEN trip_duration end) AS Casual_avg_ridelength,
-  AVG(CASE WHEN member_casual = 'member' THEN trip_duration end) AS Member_avg_ridelength
- FROM tripdata_cleaned
-GROUP BY
-  DATE_PART('month', started_at)
-```
+<img src="images/cyclist/3.3 Monthly Trip Duration.png"/>
 
 **3.4 Rides by Weekday**
   *What are the most popular weekdays for bike rides among casual riders and members?*
   Overall, the most bike rides occur on Saturday and this is the only day where the number of rides completed by casual riders exceeds rides completed by members. The number of rides completed by members is more consistent through the week, where the number of casual riders increases on Saturday, Sunday, and Friday. This may be due to casual riders spending time working during the weekdays and renting bikes during their free time on the weekends. Whereas members may be using the bike rentals to commute to and from work during the weekdays.
-```SQL
-SELECT
-  EXTRACT(dow from started_at) AS Weekday,
-  COUNT(*) AS total_rides,
-  COUNT(CASE WHEN member_casual = 'casual' THEN 1 end) AS casual_rides,
-  CAST(COUNT(CASE WHEN member_casual = 'casual' THEN 1 end) * 100.0 / COUNT(*)
-	   as DECIMAL(4,2))
-	  AS percent_casual_rides,
-  COUNT(CASE WHEN member_casual = 'member' THEN 1 end) AS member_rides,
-  CAST(COUNT(CASE WHEN member_casual = 'member' THEN 1 end) * 100.0 / COUNT(*)
-	   as DECIMAL(4,2))
-	  AS percent_member_rides
-FROM tripdata_cleaned
-GROUP BY EXTRACT(dow from started_at)
-ORDER BY EXTRACT(dow from started_at) ASC
-```
+<img src="images/cyclist/3.4 Weekday Rides.png"/>
 
 **3.5 Most Utilized Start Stations**
   *What start stations are most popular among casual riders and members?*
-
-```SQL
-SELECT 
-    DISTINCT start_station_name,
-    COUNT(*) AS total_rides,
-    SUM(CASE WHEN member_casual = 'member' THEN 1 END) AS member_rides,
-    SUM(CASE WHEN member_casual = 'casual' THEN 1 END) AS casual_rides
-FROM tripdata_cleaned
-WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02' 
-GROUP BY start_station_name
-ORDER BY total_rides DESC
-LIMIT 20;
-```
+<img src="images/cyclist/3.5 Top Start Stations.png"/>
 
 **3.6 Most Utilized End Stations**
 *What end stations are most popular among casual riders and members?*
-
-```SQL
-SELECT 
-    DISTINCT end_station_name,
-    COUNT(*) AS total_rides,
-    SUM(CASE WHEN member_casual = 'member' THEN 1 END) AS member_rides,
-    SUM(CASE WHEN member_casual = 'casual' THEN 1 END) AS casual_rides
-FROM tripdata_cleaned
-WHERE trip_duration < '1 day' AND trip_duration >= '00:00:02' 
-GROUP BY end_station_name
-ORDER BY total_rides DESC
-LIMIT 20;
-```
+<img src="images/cyclist/3.6 Top End Stations.png"/>
 
 ### 4. Conclusions
-- Casual riders spend more time riding than member riders. 
+- On average, casual riders spend more time riding than member riders. 
 - Saturday is the most popular riding day for casual and member riders.
 - Member riders use bike rentals more consistently throughout the week, while the number of casual riders increases on Fridays, Saturdays, and Sundays.
 - The summer months of June, July, and August have more rides compelted by both casual riders and members when compared to other months.
@@ -224,13 +145,13 @@ LIMIT 20;
 
 
 ### 5. Business Reccomendations
-Include additional information / advertisements about membership benefits during the initial rental process on Saturdays, Fridays, and Sundays. Since more casual riders are renting bikes on these days, the advertisements are more likely to be seen by casual riders.
+When casual riders are renting a bike on Firday, Saturday or Sunday, additional information and/or advertisements about membership benefits during the initial rental sign up. Since more casual riders are renting bikes on these days, the advertisements are more likely to be seen by casual riders.
 
-Additionally, and email promotions encouraging previous casual riders to become members should be sent on Saturdays, Fridays, and Sundays when the most rides are being completed.
+Additionally, any email promotions encouraging previous casual riders to become members should be sent on Saturdays, Fridays, and Sundays when the most rides are being completed to encourage riders to become members on these days.
 
 Based on the average ride time of 12 minutes by member riders, a promotional discount could be offered to casual riders who complete rides that are longer than 15 minutes. This encourages riders who are completing longer trips to convert to memberships.
 
-Advertisements for memberships should be focused on the Streeter Dr & Grand Ave, DuSable Lake Shore Dr & Monroe St, Michigan Ave & Oak St, DuSable Lake Shore Dr & North Blvd, Wells St & Concord Ln stations. These are the top 5 start and end stations, where the advertisements would be seen by the most casual riders. QR codes could also be added to these stations to offer easy acces to additional membership information.
+Advertisements for memberships should be focused on the top 5 start stations: Streeter Dr & Grand Ave, DuSable Lake Shore Dr & Monroe St, Michigan Ave & Oak St, DuSable Lake Shore Dr & North Blvd, Wells St & Concord Ln stations. There are additional start and end stations where advertisements could be placed to be seen by the most casual riders. QR codes could also be added to these stations to offer easy acces to additional membership information.
 
 
 ### 6. Considerations for further analysis
