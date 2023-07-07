@@ -16,7 +16,16 @@ This project uses SQL and Tableau to analyzing city bike sharing data to determi
 
 
 ---
+### Certificates & Continued Learning
 
+[The Complete SQL Bootcamp - Udemy](/certs/Udemy_TheCompleteSQLBootcamp.pdf)<br>
+*Issued July 2023*
+<br><br>
+[Getting Started with Tableau - Tableau eLearning](/certs/Tableau_eLearning_Getting_started_with_tableau.pdf)<br>
+*Issued June 2023*
+<br><br>
+[Google Data Analytics - Coursera ](/certs/Coursera_GoogleDataAnalytics.pdf)<br>
+*Issued May 2023*
 
 
 
