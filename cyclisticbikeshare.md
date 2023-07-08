@@ -1,13 +1,12 @@
 ## Analyzing Bike Rental Behavior Using SQL & Tableau
-*This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying the differences between how types of riders using the bike sharing service.*
+*This project was completed as the final case study in the Google Data Analytics Professional Certificate provided through Coursera. Real data was analyzed from a fictional company,* Cyclistic, *with a focus on identifying how casual riders and annual members use the bike sharing service.*
 
 Key Findings:
-1. Casual riders rent bikes for longer durations than member riders, with an average ride duration of 23 minutes, which is almost twice as long as members.
-2. Saturday is the most popular riding day for both casual and member riders.
-3. Casual riders complete more trips on weekends and in summer months.
-4. Member riders also complete more rides during summer months, but ride more consistently throughout the week.
+1. Casual riders rent bikes for longer durations than member riders, with an average ride duration of 23 minutes.
+2. Casual riders complete more trips on weekends and in summer months.
+3. Member riders complete more rides during summer months and more rides during weekdays.
 
-[View the Tableau dashboard here](https://public.tableau.com/views/CyclisticBikeShare_16879150650930/CyclisticBikeShare?:language=en-US&:display_count=n&:origin=viz_share_link)
+[View the Tableau dashboard here](https://public.tableau.com/views/CyclisticBikeShare_16879150650930/AnalyzingBikeSharingData?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ---
 
@@ -138,20 +137,20 @@ July is the most popular month for bike rentals, accounting for 642,522 total ri
 
 ### 4. Conclusions
 - On average, casual riders spend more time riding than member riders. 
-- Saturday is the most popular riding day for casual and member riders.
-- Member riders use bike rentals more consistently throughout the week, while the number of casual riders increases on Fridays, Saturdays, and Sundays.
+- Casual riders complete the most rides on Saturdays. This is also the day with the longest average trip duration.
+- Member riders complete the most rides during the week, while the number of casual riders increases on Fridays, Saturdays, and Sundays.
 - The summer months of June, July, and August have more rides compelted by both casual riders and members when compared to other months.
 - Streeter Dr & Grand Avenue is the most popular station for starting and ending rides. Over 3,000 more rides are started and completed at this station compared to the second most popular station. Additionally, the list of top 20 start stations and end stations were very similar with only slight differences in order when comaring the number of rides.
 
 
 ### 5. Business Reccomendations
-When casual riders are renting a bike on Firday, Saturday or Sunday, additional information and/or advertisements about membership benefits during the initial rental sign up. Since more casual riders are renting bikes on these days, the advertisements are more likely to be seen by casual riders.
+When casual riders are renting a bike on Firday, Saturday or Sunday, additional information and/or advertisements about membership benefits should be presented during the initial rental sign up. Since more casual riders are renting bikes on these days, the advertisements are more likely to be seen by casual riders.
 
-Additionally, any email promotions encouraging previous casual riders to become members should be sent on Saturdays, Fridays, and Sundays when the most rides are being completed to encourage riders to become members on these days.
+Additionally, advertisements and promotions should appear most in the summe rmonths, when casual riders are riding more frequently.
 
 Based on the average ride time of 12 minutes by member riders, a promotional discount could be offered to casual riders who complete rides that are longer than 15 minutes. This encourages riders who are completing longer trips to convert to memberships.
 
-Advertisements for memberships should be focused on the top 5 start stations: Streeter Dr & Grand Ave, DuSable Lake Shore Dr & Monroe St, Michigan Ave & Oak St, DuSable Lake Shore Dr & North Blvd, Wells St & Concord Ln stations. There are additional start and end stations where advertisements could be placed to be seen by the most casual riders. QR codes could also be added to these stations to offer easy acces to additional membership information.
+Advertisements for memberships should be focused on the top 20 start stations, which include Streeter Dr & Grand Ave, DuSable Lake Shore Dr & Monroe St, Michigan Ave & Oak St, DuSable Lake Shore Dr & North Blvd, Wells St & Concord Ln stations. These stations are where advertisements would be seen by the most casual riders. QR codes could also be added to these stations to offer easy acces to additional membership information.
 
 
 ### 6. Considerations for further analysis
